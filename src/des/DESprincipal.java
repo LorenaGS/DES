@@ -18,6 +18,9 @@ public class DESprincipal {
     public static void main(String[] args) {
         // TODO code application logic here
         Scanner opcion1 = new Scanner(System.in);
+        int [][]c=new int [16][28];
+        int [][]d=new int [16][28];
+        int [][]subkeys=new int [16][48];
         int opcion_menu;
         
         do{
@@ -116,6 +119,11 @@ public class DESprincipal {
         return temporal;
     }
     
+    private static int[] ls(int [] array, int contador){
+        int[] temporal=new int[28];
+        return temporal;
+    }
+    
     private static int[] pc2(int [] C,int [] D){
         int[] temporal=new int[48];
         return temporal;
@@ -123,6 +131,21 @@ public class DESprincipal {
     
     private static int[] ip(){
         int[] temporal=new int[64];
+        return temporal;
+    }
+    
+    private static int[] ipm1(){
+        int[] temporal=new int[64];
+        return temporal;
+    }
+    
+    private static int[] expantion(){
+        int[] temporal=new int[48];
+        return temporal;
+    }
+    
+    private static int[] permutation(){
+        int[] temporal=new int[32];
         return temporal;
     }
     
