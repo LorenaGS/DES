@@ -121,8 +121,55 @@ public class DESprincipal {
         return temporal;
     }
     
-    private static int[] ip(){
-        int[] temporal=new int[64];
+    private static int[] ip(int [] mensaje){
+        int[] temporal=new int[]{
+        mensaje[57],mensaje[49],mensaje[41],mensaje[33],mensaje[25],mensaje[17],mensaje[9],mensaje[1],
+        mensaje[59],mensaje[51],mensaje[43],mensaje[35],mensaje[27],mensaje[19],mensaje[11],mensaje[3],
+        mensaje[61],mensaje[53],mensaje[45],mensaje[37],mensaje[29],mensaje[21],mensaje[13],mensaje[5],
+        mensaje[63],mensaje[55],mensaje[47],mensaje[39],mensaje[31],mensaje[23],mensaje[15],mensaje[7],
+        mensaje[56],mensaje[48],mensaje[40],mensaje[32],mensaje[24],mensaje[16],mensaje[8],mensaje[0],
+        mensaje[58],mensaje[50],mensaje[42],mensaje[34],mensaje[26],mensaje[18],mensaje[10],mensaje[2],
+        mensaje[60],mensaje[52],mensaje[44],mensaje[36],mensaje[28],mensaje[20],mensaje[12],mensaje[4],
+        mensaje[62],mensaje[54],mensaje[46],mensaje[38],mensaje[30],mensaje[22],mensaje[14],mensaje[7]};
+        return temporal;
+    }
+    
+    private static int[] ipmenos1(int [] mensajef){
+        int[] temporal=new int[]{
+        mensajef[57],mensajef[49],mensajef[41],mensajef[33],mensajef[25],mensajef[17],mensajef[9],mensajef[1],
+        mensajef[59],mensajef[51],mensajef[43],mensajef[35],mensajef[27],mensajef[19],mensajef[11],mensajef[3],
+        mensajef[61],mensajef[53],mensajef[45],mensajef[37],mensajef[29],mensajef[21],mensajef[13],mensajef[5],
+        mensajef[63],mensajef[55],mensajef[47],mensajef[39],mensajef[31],mensajef[23],mensajef[15],mensajef[7],
+        mensajef[56],mensajef[48],mensajef[40],mensajef[32],mensajef[24],mensajef[16],mensajef[8],mensajef[0],
+        mensajef[58],mensajef[50],mensajef[42],mensajef[34],mensajef[26],mensajef[18],mensajef[10],mensajef[2],
+        mensajef[60],mensajef[52],mensajef[44],mensajef[36],mensajef[28],mensajef[20],mensajef[12],mensajef[4],
+        mensajef[62],mensajef[54],mensajef[46],mensajef[38],mensajef[30],mensajef[22],mensajef[14],mensajef[7]};
+        return temporal;
+    }
+    
+    private static int[] expansion(int [] E){
+        int[] temporal=new int[]{
+        E[31],E[0],E[1],E[2],E[3],E[4],
+        E[3],E[5],E[6],E[7],E[8],E[7],
+        E[8],E[9],E[10],E[11],E[12],E[11],
+        E[12],E[13],E[14],E[15],E[16],E[15],
+        E[16],E[17],E[18],E[19],E[20],E[19],
+        E[20],E[21],E[22],E[23],E[24],E[23],
+        E[24],E[25],E[26],E[27],E[28],E[27],
+        E[28],E[27],E[28],E[29],E[30],E[31],E[0]};
+        return temporal;
+    }
+    
+    private static int[] permutation(int [] mensaje){
+        int[] temporal=new int[]{
+        mensaje[15],mensaje[6],mensaje[19],mensaje[20],
+        mensaje[28],mensaje[11],mensaje[27],mensaje[16],
+        mensaje[0],mensaje[14],mensaje[22],mensaje[25],
+        mensaje[4],mensaje[17],mensaje[30],mensaje[9],
+        mensaje[1],mensaje[7],mensaje[23],mensaje[13],
+        mensaje[31],mensaje[26],mensaje[2],mensaje[8],
+        mensaje[18],mensaje[12],mensaje[29],mensaje[5],
+        mensaje[21],mensaje[10],mensaje[3],mensaje[24]};
         return temporal;
     }
     
@@ -133,7 +180,7 @@ public class DESprincipal {
     }
     
     private static void menu(){
-        System.out.println("       Bienvenido a la implementación de DES");
+        System.out.println("\n     Bienvenido a la implementación de DES");
         System.out.println("          Creado por:");
         System.out.println("            Deici Lorena Gomez Suarez");
         System.out.println("            David Fernando Espinel Sarmiento");
