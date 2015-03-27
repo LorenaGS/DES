@@ -21,6 +21,9 @@ public class DESprincipal {
         int opcion_menu;
         int [][]C = new int[17][28];
         int [][]D = new int[17][28];
+        int [][]L = new int[17][32]; 
+        int [][]R = new int[17][32];
+                
         int [][]subKey = new int[17][48];
         
         do{
@@ -31,7 +34,7 @@ public class DESprincipal {
             System.out.println("1. Encriptar un mensaje");
             System.out.println("Hola niña linda!");
             int[] k={0,0,0,1,0,0,1,1, 0,0,1,1,0,1,0,0, 0,1,0,1,0,1,1,1, 0,1,1,1,1,0,0,1, 1,0,0,1,1,0,1,1, 1,0,1,1,1,1,0,0,1,1,0,1,1,1,1,1, 1,1,1,1,0,0,0,1};
-        
+            int[] m={0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,1,0,1,0,0,0,1,0,1,0,1,1,0,0,1,1,1,1,0,0,0,1,0,0,1,1,0,1,0,1,0,1,1,1,1,0,0,1,1,0,1,1,1,1,0,1,1,1,1};
             int[] k0=pc1(k);
         
             int ejemplo=75;
@@ -64,7 +67,24 @@ public class DESprincipal {
                 subKey[i] = pc2(C[i], D[i]);
                 imprimirArray(subKey[i]);
             }
+            int[] m0= ip(m); 
+            System.out.println("\nAplicando IP (m)-m': ");
+            imprimirArray(m0);
+            
+            for (int i=0;i< (m0.length)/2;i++){
+                L[0][i] = m0 [i];
             }
+            for (int i=(m0.length)/2;i< m0.length ;i++){
+                R[0][i-32] = m0 [i];
+            }
+            
+            for (int i = 1; i<= 16;i++){
+                L[i]=R[i-1];
+                R[i]= xor(L[i-1],f(R[i-1],subKey[i]));
+            }
+            int[] cipher = ipmenos1(R[16],L[16]);
+            }
+            
             //TO-DO: Hacer los stages
         }while(opcion_menu!=3);        
     }
@@ -117,7 +137,7 @@ public class DESprincipal {
         total[20],total[9],total[22],total[18],total[11],total[3],total[25],total[7],total[15],total[6],
         total[26],total[19],total[12],total[1],total[40],total[51],total[30],total[36],total[46],total[54],
         total[29],total[39],total[50],total[44],total[32],total[47],total[43],total[48],total[38],total[55],
-        total[33],total[52],total[45],total[42],total[49],total[35],total[28],total[31]};
+        total[33],total[52],total[45],total[41],total[49],total[35],total[28],total[31]};
         return temporal;
     }
     
@@ -130,11 +150,18 @@ public class DESprincipal {
         mensaje[56],mensaje[48],mensaje[40],mensaje[32],mensaje[24],mensaje[16],mensaje[8],mensaje[0],
         mensaje[58],mensaje[50],mensaje[42],mensaje[34],mensaje[26],mensaje[18],mensaje[10],mensaje[2],
         mensaje[60],mensaje[52],mensaje[44],mensaje[36],mensaje[28],mensaje[20],mensaje[12],mensaje[4],
-        mensaje[62],mensaje[54],mensaje[46],mensaje[38],mensaje[30],mensaje[22],mensaje[14],mensaje[7]};
+        mensaje[62],mensaje[54],mensaje[46],mensaje[38],mensaje[30],mensaje[22],mensaje[14],mensaje[6]};
         return temporal;
     }
     
-    private static int[] ipmenos1(int [] mensajef){
+    private static int[] ipmenos1(int [] R , int [] L){
+        int[] mensajef = new int [64];
+        for (int i = 0; i< R.length;i++){
+            mensajef[i]=R[i];
+        }
+        for (int i = 32; i< mensajef.length;i++){
+            mensajef[i]=L[i-32];
+        }
         int[] temporal=new int[]{
         mensajef[57],mensajef[49],mensajef[41],mensajef[33],mensajef[25],mensajef[17],mensajef[9],mensajef[1],
         mensajef[59],mensajef[51],mensajef[43],mensajef[35],mensajef[27],mensajef[19],mensajef[11],mensajef[3],
@@ -147,16 +174,16 @@ public class DESprincipal {
         return temporal;
     }
     
-    private static int[] expansion(int [] E){
+    private static int[] expantion(int [] E){
         int[] temporal=new int[]{
         E[31],E[0],E[1],E[2],E[3],E[4],
-        E[3],E[5],E[6],E[7],E[8],E[7],
+        E[3],E[4],E[5],E[6],E[7],E[8],E[7],
         E[8],E[9],E[10],E[11],E[12],E[11],
         E[12],E[13],E[14],E[15],E[16],E[15],
         E[16],E[17],E[18],E[19],E[20],E[19],
         E[20],E[21],E[22],E[23],E[24],E[23],
         E[24],E[25],E[26],E[27],E[28],E[27],
-        E[28],E[27],E[28],E[29],E[30],E[31],E[0]};
+        E[28],E[29],E[30],E[31],E[0]};
         return temporal;
     }
     
@@ -173,6 +200,38 @@ public class DESprincipal {
         return temporal;
     }
     
+    private static int[] xor(int[] a,int[] b){
+        int[] temporal = new int[a.length];
+        for (int i=0; i< a.length; i++){
+            if(a[i]==b[i]){
+                temporal[i] = 0;
+            }
+            else{
+                temporal[i] = 1;
+            }
+        }
+        return temporal;
+    }
+    
+    private static int[] f(int [] R, int [] K){
+        int[] temporal=new int[32];
+        int[] exp = expantion(R);
+        System.out.println("\nAQUI ESTA EXP DENTRO DE F");
+        imprimirArray(exp);
+        int[] result = xor(exp,K);
+        System.out.println("\nAQUI ESTA K");
+        imprimirArray(K);
+        System.out.println("\nAQUI ESTA RESUL XOR");
+        imprimirArray(result);
+        int[][] B = new int[8][6];
+        for (int i=0;i<8;i++){
+            for(int j=0;j<6;j++){
+                B[i][j]=result[(i*6)+j];
+            }
+        }
+        return temporal;
+    }
+   
     private static void imprimirArray(int [] array){
         for (int i = 0; i< array.length;i++){
             System.out.print(array[i]);
