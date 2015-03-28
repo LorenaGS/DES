@@ -17,11 +17,11 @@ public class DESprincipal {
      */
     
         public static int [][]S1 = {{14,4,13,1,2,15,11,8,3,10,6,12,5,9,0,7},{0,15,7,4,14,2,13,1,10,6,12,11,9,5,3,8},
-            {4,1,14,8,13,6,2,11,15,12,9,7,3,10,5,0},{15,12,8,2,4,9,1,7,5,11,3,14,10,0,9,13}};
+            {4,1,14,8,13,6,2,11,15,12,9,7,3,10,5,0},{15,12,8,2,4,9,1,7,5,11,3,14,10,0,6,13}};
         public static int [][]S2 = {{15,1,8,14,6,11,3,4,9,7,2,13,12,0,5,10},{3,13,4,7,15,2,8,14,12,0,1,10,6,9,11,5},
             {0,14,7,11,10,4,13,1,5,8,12,6,9,3,2,15},{13,8,10,1,3,15,4,2,11,6,7,12,0,5,14,9}};
         public static int [][]S3 = {{10,0,9,14,6,3,15,5,1,13,12,7,11,4,2,8},{13,7,0,9,3,4,6,10,2,8,5,14,12,11,15,1},
-            {13,6,4,9,8,15,3,0,11,1,2,12,5,10,14,7},{1,10,13,00,6,9,8,7,4,12,14,3,11,5,2,12}};
+            {13,6,4,9,8,15,3,0,11,1,2,12,5,10,14,7},{1,10,13,0,6,9,8,7,4,15,14,3,11,5,2,12}};
         public static int [][]S4 = {{7,13,14,3,0,6,9,10,1,2,8,5,11,12,4,15},{13,8,11,5,6,15,0,3,4,7,2,12,1,10,14,9},
             {10,6,9,0,12,11,7,13,15,1,3,14,5,2,8,4},{3,15,0,6,10,1,13,8,9,4,5,11,12,7,2,14}};
         public static int [][]S5 = {{2,12,4,1,7,10,11,6,8,5,3,15,13,0,14,9},{14,11,2,12,4,7,13,1,5,0,15,10,3,9,8,6},
@@ -58,14 +58,14 @@ public class DESprincipal {
         
             int ejemplo=75;
             String bin = String.format("%8s", Integer.toBinaryString(ejemplo)).replace(' ','0');
-            System.out.println(bin);
+            //System.out.println(bin);
         
         
-            System.out.println("Llave ingresada - k: ");
-            imprimirArray(k);
+            //System.out.println("Llave ingresada - k: ");
+            //imprimirArray(k);
         
-            System.out.println("\nAplicando PC-1(k)-k': ");
-            imprimirArray(k0);
+            //System.out.println("\nAplicando PC-1(k)-k': ");
+            //imprimirArray(k0);
             
             for (int i=0;i< (k0.length)/2;i++){
                 C[0][i] = k0 [i];
@@ -87,25 +87,95 @@ public class DESprincipal {
                 //imprimirArray(subKey[i]);
             }
             int[] m0= ip(m); 
-            System.out.println("\nAplicando IP (m)-m': ");
-            imprimirArray(m0);
+            //System.out.println("\nAplicando IP (m)-m': ");
+            //imprimirArray(m0);
             
             for (int i=0;i< (m0.length)/2;i++){
                 L[0][i] = m0 [i];
             }
+            //System.out.println("\nLLLLLLL 0 ");
+            //imprimirArray(L[0]);
             for (int i=(m0.length)/2;i< m0.length ;i++){
                 R[0][i-32] = m0 [i];
             }
+            //System.out.println("\nRRRRRRR 0");
+            //imprimirArray(R[0]);
             
             for (int i = 1; i<= 16;i++){
                 L[i]=R[i-1];
                 R[i]= xor(L[i-1],f(R[i-1],subKey[i]));
+                //System.out.println("\nLLLLLLL " + i);
+                //imprimirArray(L[i]);
+                //System.out.println("\nRRRRRRR " + i);
+                //imprimirArray(R[i]);
             }
             int[] cipher = ipmenos1(R[16],L[16]);
             
-            
-            
+            System.out.println("\nTEXTO CIFRADO!!! ");
+            imprimirArray(cipher);
             }
+        else{
+            if(opcion_menu==2){
+                System.out.println("2. Desencriptar un texto cifrado");
+            System.out.println("Hola niña linda!");
+            int[] k={0,0,0,1,0,0,1,1,0,0,1,1,0,1,0,0,0,1,0,1,0,1,1,1,0,1,1,1,1,0,0,1,1,0,0,1,1,0,1,1,1,0,1,1,1,1,0,0,1,1,0,1,1,1,1,1,1,1,1,1,0,0,0,1};
+            int[] c={1,0,0,0,0,1,0,1,1,1,1,0,1,0,0,0,0,0,0,1,0,0,1,1,0,1,0,1,0,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,1,0,1,0,1,1,0,1,0,0,0,0,0,0,0,1,0,1};
+            int[] k0=pc1(k);
+
+            //System.out.println("Llave ingresada - k: ");
+            //imprimirArray(k);
+        
+            //System.out.println("\nAplicando PC-1(k)-k': ");
+            //imprimirArray(k0);
+            
+            for (int i=0;i< (k0.length)/2;i++){
+                C[0][i] = k0 [i];
+            }
+            for (int i=(k0.length)/2;i< k0.length ;i++){
+                D[0][i-28] = k0 [i];
+            }
+            
+            //TO-DO: Terminar la generación de las 16 sub llaves
+            for(int i=1;i<=16;i++){
+                C[i]= ls(C[i-1],i);
+                D[i]= ls(D[i-1],i);
+                //System.out.println("\nArray C" + i + ": ");
+                //imprimirArray(C[i]);
+                //System.out.println("\nArray D" + i + ": ");
+                //imprimirArray(D[i]);
+                //System.out.println("\nSub-Key: " +i );
+                //subKey[i] = pc2(C[i], D[i]);
+                //imprimirArray(subKey[i]);
+            }
+            int[] c0= ip(c); 
+            //System.out.println("\nAplicando IP (m)-m': ");
+            //imprimirArray(c0);
+            
+            for (int i=0;i< (c0.length)/2;i++){ 
+                R[16][i] = c0 [i];
+            }
+            System.out.println("\nR 16 ");
+            imprimirArray(R[16]);
+            for (int i=(c0.length)/2;i< c0.length ;i++){
+                L[16][i-32] = c0 [i];
+            }
+            System.out.println("\nL 16");
+            imprimirArray(L[16]);
+            
+            for (int i = 16; i>= 1;i--){
+                R[i-1]=L[i];
+                L[i-1]= xor(R[i],f(L[i],subKey[i]));
+                System.out.println("\nLLLLLLL " + (i-1));
+                imprimirArray(L[i-1]);
+                System.out.println("\nRRRRRRR " + (i-1));
+                imprimirArray(R[i-1]);
+            }
+            int[] decipher = ipmenos1(L[0],R[0]);
+            
+            System.out.println("\nTEXTO DESCIFRADO!!! ");
+            imprimirArray(decipher);
+            }
+        }
             
             //TO-DO: Hacer los stages
         }while(opcion_menu!=3);        
@@ -185,14 +255,14 @@ public class DESprincipal {
             mensajef[i]=L[i-32];
         }
         int[] temporal=new int[]{
-        mensajef[57],mensajef[49],mensajef[41],mensajef[33],mensajef[25],mensajef[17],mensajef[9],mensajef[1],
-        mensajef[59],mensajef[51],mensajef[43],mensajef[35],mensajef[27],mensajef[19],mensajef[11],mensajef[3],
-        mensajef[61],mensajef[53],mensajef[45],mensajef[37],mensajef[29],mensajef[21],mensajef[13],mensajef[5],
-        mensajef[63],mensajef[55],mensajef[47],mensajef[39],mensajef[31],mensajef[23],mensajef[15],mensajef[7],
-        mensajef[56],mensajef[48],mensajef[40],mensajef[32],mensajef[24],mensajef[16],mensajef[8],mensajef[0],
-        mensajef[58],mensajef[50],mensajef[42],mensajef[34],mensajef[26],mensajef[18],mensajef[10],mensajef[2],
-        mensajef[60],mensajef[52],mensajef[44],mensajef[36],mensajef[28],mensajef[20],mensajef[12],mensajef[4],
-        mensajef[62],mensajef[54],mensajef[46],mensajef[38],mensajef[30],mensajef[22],mensajef[14],mensajef[7]};
+        mensajef[39],mensajef[7],mensajef[47],mensajef[15],mensajef[55],mensajef[23],mensajef[63],mensajef[31],
+        mensajef[38],mensajef[6],mensajef[46],mensajef[14],mensajef[54],mensajef[22],mensajef[62],mensajef[30],
+        mensajef[37],mensajef[5],mensajef[45],mensajef[13],mensajef[53],mensajef[21],mensajef[61],mensajef[29],
+        mensajef[36],mensajef[4],mensajef[44],mensajef[12],mensajef[52],mensajef[20],mensajef[60],mensajef[28],
+        mensajef[35],mensajef[3],mensajef[43],mensajef[11],mensajef[51],mensajef[19],mensajef[59],mensajef[27],
+        mensajef[34],mensajef[2],mensajef[42],mensajef[10],mensajef[50],mensajef[18],mensajef[58],mensajef[26],
+        mensajef[33],mensajef[1],mensajef[41],mensajef[9],mensajef[49],mensajef[17],mensajef[57],mensajef[25],
+        mensajef[32],mensajef[0],mensajef[40],mensajef[8],mensajef[48],mensajef[16],mensajef[56],mensajef[24]};
         return temporal;
     }
     
@@ -236,26 +306,39 @@ public class DESprincipal {
     }
     
     private static int[] f(int [] R, int [] K){
+        int[] permutationT = new int[32];
         int[] temporal=new int[32];
         int[] exp = expantion(R);
-        System.out.println("\nAQUI ESTA EXP DENTRO DE F");
-        imprimirArray(exp);
+        //System.out.println("\nAQUI ESTA EXP DENTRO DE F");
+        //imprimirArray(exp);
         int[] result = xor(exp,K);
-        System.out.println("\nAQUI ESTA K");
-        imprimirArray(K);
-        System.out.println("\nAQUI ESTA RESUL XOR");
-        imprimirArray(result);
+        //System.out.println("\nAQUI ESTA K");
+        //imprimirArray(K);
+        //System.out.println("\nAQUI ESTA RESUL XOR");
+        //imprimirArray(result);
         int[][] B = new int[8][6];
         for (int i=0;i<8;i++){
             for(int j=0;j<6;j++){
                 B[i][j]=result[(i*6)+j];
             }
         }
-        int[] ren=seleccionbox(B[0],1);
+        int[][] C = new int[8][4];
         
-        return temporal;
+        for (int i=0; i<8;i++){
+            C[i]=seleccionbox(B[i],i);
+        }
+        for (int i=0;i<C.length;i++){
+            for (int j=0;j<C[i].length;j++){
+                temporal[(i*4)+j] = C[i][j];
+            }
+        }
+        permutationT = permutation(temporal);
+        //System.out.println("\nSALIDA DE F");
+        //imprimirArray(permutationT);    
+        return permutationT;
+        
     }
-   
+    
     private static void imprimirArray(int [] array){
         for (int i = 0; i< array.length;i++){
             System.out.print(array[i]);
@@ -325,8 +408,4 @@ public class DESprincipal {
          
         return temporal;
     }
-    
-    
-    
-    
 }
