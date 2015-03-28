@@ -15,6 +15,15 @@ public class DESprincipal {
     /**
      * @param args the command line arguments
      */
+    
+        static int [][]S1 = new int[4][16];
+        static int [][]S2 = new int[4][16];
+        static int [][]S3 = new int[4][16];
+        static int [][]S4 = new int[4][16];
+        static int [][]S5 = new int[4][16];
+        static int [][]S6 = new int[4][16];
+        static int [][]S7 = new int[4][16];
+        static int [][]S8 = new int[4][16];
     public static void main(String[] args) {
         // TODO code application logic here
         Scanner opcion1 = new Scanner(System.in);
@@ -23,6 +32,7 @@ public class DESprincipal {
         int [][]D = new int[17][28];
         int [][]L = new int[17][32]; 
         int [][]R = new int[17][32];
+        
                 
         int [][]subKey = new int[17][48];
         
@@ -248,6 +258,10 @@ public class DESprincipal {
         System.out.println("2. Desencriptar mensaje");
         System.out.println("3. Salir");
         System.out.println("Ingrese su opción: ");
+        
+    }
+    
+    private static void iniciarSBoxes(){
         
     }
 }
