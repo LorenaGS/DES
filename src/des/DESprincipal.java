@@ -272,5 +272,4 @@ public class DESprincipal {
         System.out.println("Ingrese su opción: ");
         
     }
-
 }
