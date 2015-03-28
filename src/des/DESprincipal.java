@@ -51,7 +51,7 @@ public class DESprincipal {
         
         if(opcion_menu==1){
             System.out.println("1. Encriptar un mensaje");
-            System.out.println("Hola niña linda!");
+            System.out.println("Hola niña linda!!!!!");
             int[] k={0,0,0,1,0,0,1,1, 0,0,1,1,0,1,0,0, 0,1,0,1,0,1,1,1, 0,1,1,1,1,0,0,1, 1,0,0,1,1,0,1,1, 1,0,1,1,1,1,0,0,1,1,0,1,1,1,1,1, 1,1,1,1,0,0,0,1};
             int[] m={0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,1,0,1,0,0,0,1,0,1,0,1,1,0,0,1,1,1,1,0,0,0,1,0,0,1,1,0,1,0,1,0,1,1,1,1,0,0,1,1,0,1,1,1,1,0,1,1,1,1};
             int[] k0=pc1(k);
@@ -272,8 +272,5 @@ public class DESprincipal {
         System.out.println("Ingrese su opción: ");
         
     }
-<<<<<<< HEAD
-=======
-    
->>>>>>> 3ce52eae9e7c9fad97e28d49db99777399b4ee93
+
 }
