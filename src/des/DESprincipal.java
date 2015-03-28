@@ -106,6 +106,11 @@ public class DESprincipal {
             
             
             }
+        else{
+            if(opcion_menu==2){
+                int[] temp={};
+            }
+        }
             
             //TO-DO: Hacer los stages
         }while(opcion_menu!=3);        
@@ -238,13 +243,13 @@ public class DESprincipal {
     private static int[] f(int [] R, int [] K){
         int[] temporal=new int[32];
         int[] exp = expantion(R);
-        System.out.println("\nAQUI ESTA EXP DENTRO DE F");
-        imprimirArray(exp);
+        //System.out.println("\nAQUI ESTA EXP DENTRO DE F");
+        //imprimirArray(exp);
         int[] result = xor(exp,K);
-        System.out.println("\nAQUI ESTA K");
-        imprimirArray(K);
-        System.out.println("\nAQUI ESTA RESUL XOR");
-        imprimirArray(result);
+        //System.out.println("\nAQUI ESTA K");
+        //imprimirArray(K);
+        //System.out.println("\nAQUI ESTA RESUL XOR");
+        //imprimirArray(result);
         int[][] B = new int[8][6];
         for (int i=0;i<8;i++){
             for(int j=0;j<6;j++){
@@ -320,12 +325,7 @@ public class DESprincipal {
             }else{
                 temporal[i]=1;
             }
-        }
-         
+        } 
         return temporal;
-    }
-    
-    
-    
-    
+    }   
 }
