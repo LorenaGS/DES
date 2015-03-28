@@ -78,13 +78,13 @@ public class DESprincipal {
             for(int i=1;i<=16;i++){
                 C[i]= ls(C[i-1],i);
                 D[i]= ls(D[i-1],i);
-                System.out.println("\nArray C" + i + ": ");
-                imprimirArray(C[i]);
-                System.out.println("\nArray D" + i + ": ");
-                imprimirArray(D[i]);
-                System.out.println("\nSub-Key: " +i );
+                //System.out.println("\nArray C" + i + ": ");
+                //imprimirArray(C[i]);
+                //System.out.println("\nArray D" + i + ": ");
+                //imprimirArray(D[i]);
+                //System.out.println("\nSub-Key: " +i );
                 subKey[i] = pc2(C[i], D[i]);
-                imprimirArray(subKey[i]);
+                //imprimirArray(subKey[i]);
             }
             int[] m0= ip(m); 
             System.out.println("\nAplicando IP (m)-m': ");
@@ -251,6 +251,8 @@ public class DESprincipal {
                 B[i][j]=result[(i*6)+j];
             }
         }
+        int[] ren=seleccionbox(B[0],1);
+        
         return temporal;
     }
    
@@ -272,4 +274,59 @@ public class DESprincipal {
         System.out.println("Ingrese su opción: ");
         
     }
+    
+    private static int[] seleccionbox(int[] vectorB, int indice){
+        int[] temporal=new int[4];
+        
+        String rtemp =Integer.toString(vectorB[0])+Integer.toString(vectorB[5]); 
+        String ctemp=Integer.toString(vectorB[1])+Integer.toString(vectorB[2])+Integer.toString(vectorB[3])+Integer.toString(vectorB[4]);
+        int r=Integer.parseInt(rtemp,2);
+        int c=Integer.parseInt(ctemp,2);
+        int resultado=0;
+        
+        switch(indice){
+            case 0:
+                resultado=S1[r][c];
+                break;
+            case 1:
+                resultado=S2[r][c];
+                break;
+            case 2:
+                resultado=S3[r][c];
+                break;    
+            case 3:
+                resultado=S4[r][c];
+                break;
+            case 4:
+                resultado=S5[r][c];
+                break;
+            case 5:
+                resultado=S6[r][c];
+                break;
+            case 6:
+                resultado=S7[r][c];
+                break;
+            case 7:
+                resultado=S8[r][c];
+                break; 
+        }
+        
+        
+        String binario = String.format("%4s", Integer.toBinaryString(resultado)).replace(' ','0');
+        char[] charArray = binario.toCharArray();
+                     
+        for(int i=0;i<charArray.length;i++){
+            if(charArray[i]=='0'){
+                temporal[i]=0;
+            }else{
+                temporal[i]=1;
+            }
+        }
+         
+        return temporal;
+    }
+    
+    
+    
+    
 }
