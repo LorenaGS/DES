@@ -269,7 +269,6 @@ public class DESprincipal {
         System.out.println("1. Encriptar mensaje");
         System.out.println("2. Desencriptar mensaje");
         System.out.println("3. Salir");
-        System.out.println("Ingrese su opción: ");
-        
+        System.out.println("Ingrese su opción: ");   
     }
 }
