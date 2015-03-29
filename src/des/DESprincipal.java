@@ -154,8 +154,120 @@ public class DESprincipal {
                     imprimirArray(decipher);
                 }
             }
+<<<<<<< HEAD
+            for (int i=(k0.length)/2;i< k0.length ;i++){
+                D[0][i-28] = k0 [i];
+            }
+            
+            //TO-DO: Terminar la generación de las 16 sub llaves
+            for(int i=1;i<=16;i++){
+                C[i]= ls(C[i-1],i);
+                D[i]= ls(D[i-1],i);
+                //System.out.println("\nArray C" + i + ": ");
+                //imprimirArray(C[i]);
+                //System.out.println("\nArray D" + i + ": ");
+                //imprimirArray(D[i]);
+                //System.out.println("\nSub-Key: " +i );
+                subKey[i] = pc2(C[i], D[i]);
+                //imprimirArray(subKey[i]);
+            }
+            int[] m0= ip(m); 
+            //System.out.println("\nAplicando IP (m)-m': ");
+            //imprimirArray(m0);
+            
+            for (int i=0;i< (m0.length)/2;i++){
+                L[0][i] = m0 [i];
+            }
+            //System.out.println("\nLLLLLLL 0 ");
+            //imprimirArray(L[0]);
+            for (int i=(m0.length)/2;i< m0.length ;i++){
+                R[0][i-32] = m0 [i];
+            }
+            //System.out.println("\nRRRRRRR 0");
+            //imprimirArray(R[0]);
+            
+            for (int i = 1; i<= 16;i++){
+                L[i]=R[i-1];
+                R[i]= xor(L[i-1],f(R[i-1],subKey[i]));
+                //System.out.println("\nLLLLLLL " + i);
+                //imprimirArray(L[i]);
+                //System.out.println("\nRRRRRRR " + i);
+                //imprimirArray(R[i]);
+            }
+            int[] cipher = ipmenos1(R[16],L[16]);
+            
+            System.out.println("\nTEXTO CIFRADO!!! ");
+            imprimirArray(cipher);
+            }
+        else{
+            if(opcion_menu==2){
+                System.out.println("2. Desencriptar un texto cifrado");
+            System.out.println("Hola niña linda!");
+            int[] k={0,0,0,1,0,0,1,1,0,0,1,1,0,1,0,0,0,1,0,1,0,1,1,1,0,1,1,1,1,0,0,1,1,0,0,1,1,0,1,1,1,0,1,1,1,1,0,0,1,1,0,1,1,1,1,1,1,1,1,1,0,0,0,1};
+            int[] c={1,0,0,0,0,1,0,1,1,1,1,0,1,0,0,0,0,0,0,1,0,0,1,1,0,1,0,1,0,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,1,0,1,0,1,1,0,1,0,0,0,0,0,0,0,1,0,1};
+            int[] k0=pc1(k);
+
+            //System.out.println("Llave ingresada - k: ");
+            //imprimirArray(k);
+        
+            //System.out.println("\nAplicando PC-1(k)-k': ");
+            //imprimirArray(k0);
+            
+            for (int i=0;i< (k0.length)/2;i++){
+                C[0][i] = k0 [i];
+            }
+            for (int i=(k0.length)/2;i< k0.length ;i++){
+                D[0][i-28] = k0 [i];
+            }
+            
+            //TO-DO: Terminar la generación de las 16 sub llaves
+            for(int i=1;i<=16;i++){
+                C[i]= ls(C[i-1],i);
+                D[i]= ls(D[i-1],i);
+                //System.out.println("\nArray C" + i + ": ");
+                //imprimirArray(C[i]);
+                //System.out.println("\nArray D" + i + ": ");
+                //imprimirArray(D[i]);
+                //System.out.println("\nSub-Key: " +i );
+                //subKey[i] = pc2(C[i], D[i]);
+                //imprimirArray(subKey[i]);
+            }
+            int[] c0= ip(c); 
+            //System.out.println("\nAplicando IP (m)-m': ");
+            //imprimirArray(c0);
+            
+            for (int i=0;i< (c0.length)/2;i++){ 
+                R[16][i] = c0 [i];
+            }
+            System.out.println("\nR 16 ");
+            imprimirArray(R[16]);
+            for (int i=(c0.length)/2;i< c0.length ;i++){
+                L[16][i-32] = c0 [i];
+            }
+            System.out.println("\nL 16");
+            imprimirArray(L[16]);
+            
+            for (int i = 16; i>= 1;i--){
+                R[i-1]=L[i];
+                L[i-1]= xor(R[i],f(L[i],subKey[i]));
+                System.out.println("\nLLLLLLL " + (i-1));
+                imprimirArray(L[i-1]);
+                System.out.println("\nRRRRRRR " + (i-1));
+                imprimirArray(R[i-1]);
+            }
+            int[] decipher = ipmenos1(L[0],R[0]);
+            
+            System.out.println("\nTEXTO DESCIFRADO!!! ");
+            imprimirArray(decipher);
+            }
+        }
+            
+            //TO-DO: Hacer los stages
+        }while(opcion_menu!=3);        
+=======
 //TO-DO: Hacer los stages
         } while (opcion_menu != 3);
+>>>>>>> 78fd27130a39d39bdc6091aa600ef216c8833023
     }
 
     private static int[] pc1(int[] entrada_llave) {
@@ -328,6 +440,10 @@ public class DESprincipal {
         System.out.println("2. Desencriptar mensaje");
         System.out.println("3. Salir");
         System.out.println("Ingrese su opción: ");
+<<<<<<< HEAD
+        
+=======
+>>>>>>> 78fd27130a39d39bdc6091aa600ef216c8833023
     }
 
     private static int[] seleccionbox(int[] vectorB, int indice) {
@@ -372,6 +488,13 @@ public class DESprincipal {
                 temporal[i] = 1;
             }
         }
+<<<<<<< HEAD
+         
         return temporal;
     }
 }
+=======
+        return temporal;
+    }
+}
+>>>>>>> 78fd27130a39d39bdc6091aa600ef216c8833023
