@@ -31,24 +31,134 @@ public class DESprincipal {
     {1, 4, 11, 13, 12, 3, 7, 14, 10, 15, 6, 8, 0, 5, 9, 2}, {6, 11, 13, 8, 1, 4, 10, 7, 9, 5, 0, 15, 14, 2, 3, 12}};
     public static int[][] S8 = {{13, 2, 8, 4, 6, 15, 11, 1, 10, 9, 3, 14, 5, 0, 12, 7}, {1, 15, 13, 8, 10, 3, 7, 4, 12, 5, 6, 11, 0, 14, 9, 2},
     {7, 11, 4, 1, 9, 12, 14, 2, 0, 6, 10, 13, 15, 3, 5, 8}, {2, 1, 14, 7, 4, 10, 8, 13, 15, 12, 9, 0, 3, 5, 6, 11}};
-
+    public static Scanner datos = new Scanner(System.in);
+    public static int[] k = new int[64];
+    public static int[] m = new int[64];
+    public static int[][] C = new int[17][28];
+    public static int[][] D = new int[17][28];
+    public static int[][] L = new int[17][32];
+    public static int[][] R = new int[17][32];
+    public static int[][] subKey = new int[17][48];
+   
     public static void main(String[] args) {
 // TODO code application logic here
         Scanner opcion1 = new Scanner(System.in);
         int opcion_menu;
-        int[][] C = new int[17][28];
-        int[][] D = new int[17][28];
-        int[][] L = new int[17][32];
-        int[][] R = new int[17][32];
-        int[][] subKey = new int[17][48];
+
         do {
             menu();
             opcion_menu = opcion1.nextInt();
             if (opcion_menu == 1) {
                 System.out.println("1. Encriptar un mensaje");
                 System.out.println("Hola niña linda!");
-                int[] k = {0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1};
-                int[] m = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1};
+                String[] cadena2;
+                lecturaKey();
+                cadena2 = lecturaDatos();
+                for(int i=0;i<cadena2.length;i++){
+                    char[] charArray2 = cadena2[i].toCharArray();
+                    int[] vectorbinario=new int[charArray2.length];
+                    for(int j=0;j<charArray2.length;j++){
+                        if(charArray2[j]=='0'){
+                            vectorbinario[j]=0;
+                        }else{
+                            vectorbinario[j]=1;
+                        }
+                    }
+                cifrado(vectorbinario,k);
+                }
+                //int[] k = {0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1};
+                //int[] m = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1};
+            } else {
+                if (opcion_menu == 2) {
+                    System.out.println("2. Desencriptar un texto cifrado");
+                    System.out.println("Hola niña linda!");
+                    //int[] k = {0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1};
+                    //int[] c = {1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1};
+                    String[] cadena2;
+                lecturaKey();
+                cadena2 = lecturaDatos();
+                for(int i=0;i<cadena2.length;i++){
+                    char[] charArray2 = cadena2[i].toCharArray();
+                    int[] vectorbinario=new int[charArray2.length];
+                    for(int j=0;j<charArray2.length;j++){
+                        if(charArray2[j]=='0'){
+                            vectorbinario[j]=0;
+                        }else{
+                            vectorbinario[j]=1;
+                        }
+                    }
+                descifrado(vectorbinario,k);
+                }
+                }
+            }
+//TO-DO: Hacer los stages
+        } while (opcion_menu != 3);
+    }
+    
+    private static void lecturaKey(){
+        System.out.println("\nIngrese la llave: ");
+        String key = datos.nextLine();
+        char[] charArrayKey = key.toCharArray();
+        int[] arregloAsciiKey = new int[charArrayKey.length];
+        String[] arregloBinarios = new String[8];
+         for (int i=0;i<arregloAsciiKey.length;i++){
+            arregloAsciiKey[i]= charArrayKey[i];
+            arregloBinarios[i] = String.format("%8s", Integer.toBinaryString(arregloAsciiKey[i])).replace(' ', '0');
+        }
+        String cadena2 = new String(); 
+        for (int i=0;i<arregloBinarios.length;i++){
+                cadena2= cadena2 + arregloBinarios[i];
+            }
+        System.out.println(cadena2);
+        char[] charArray2 = cadena2.toCharArray();
+        System.out.println(charArray2.length);
+        for(int j=0;j<charArray2.length;j++){
+            if(charArray2[j]=='0'){
+                k[j]=0;
+            }else{
+                k[j]=1;
+            }
+        }
+        
+    }
+    
+    private static String[] lecturaDatos(){
+        System.out.println("\nIngrese el mensaje : ");
+        String mensaje = datos.nextLine();
+        int tamaño = 0;
+        int resto = 0;
+        char[] charArray = mensaje.toCharArray();
+        int[] arregloAscii = new int[charArray.length];
+        
+        tamaño = arregloAscii.length/8;
+        resto = arregloAscii.length%8;
+        String[] arregloBinarios = new String[(8*tamaño+resto)];
+        for (int i=0;i<charArray.length;i++){
+            arregloAscii[i]= charArray[i];
+            arregloBinarios[i] = String.format("%8s", Integer.toBinaryString(arregloAscii[i])).replace(' ', '0');
+        }
+        for (int i=arregloAscii.length;i<arregloBinarios.length;i++){
+            arregloBinarios[i]= "00000000";
+        }
+       
+        String[][] cadena = new String[tamaño][8];
+        for (int i=0;i<tamaño;i++){
+            for (int j=0;j<8;j++){
+                cadena[i][j] = arregloBinarios[(i*8)+j];
+                
+            }
+        }
+        String[] cadena2 = new String[tamaño]; 
+        for (int i=0;i<cadena.length;i++){
+            for (int j=0;j<8;j++){
+                cadena2[i]= cadena2[i] + cadena[i][j];
+            }
+        }
+        return cadena2;
+    }
+    
+    private static void cifrado(int[] m,int[] k){
+                        
                 int[] k0 = pc1(k);
                 int ejemplo = 75;
                 String bin = String.format("%8s", Integer.toBinaryString(ejemplo)).replace(' ', '0');
@@ -97,15 +207,39 @@ public class DESprincipal {
 //imprimirArray(R[i]);
                 }
                 int[] cipher = ipmenos1(R[16], L[16]);
+                int tamaño = cipher.length/8;
+                String[] cipherT = new String[tamaño]; 
                 System.out.println("\nTEXTO CIFRADO!!! ");
+                for(int i=0;i<tamaño;i++){
+                    cipherT[i] = Integer.toString(cipher[(i*8)+0]);
+                    cipherT[i] = cipherT[i] + Integer.toString(cipher[(i*8)+1]);
+                    cipherT[i] = cipherT[i] + Integer.toString(cipher[(i*8)+2]);
+                    cipherT[i] = cipherT[i] + Integer.toString(cipher[(i*8)+3]);
+                    cipherT[i] = cipherT[i] + Integer.toString(cipher[(i*8)+4]);
+                    cipherT[i] = cipherT[i] + Integer.toString(cipher[(i*8)+5]);
+                    cipherT[i] = cipherT[i] + Integer.toString(cipher[(i*8)+6]);
+                    cipherT[i] = cipherT[i] + Integer.toString(cipher[(i*8)+7]);
+                }
+                /*for (int i=0;i<cipherT.length;i++){
+                    System.out.println(cipherT[i]);
+                } */
+                int[] cipherF = new int[cipherT.length];
+                for(int i=0;i<cipherT.length;i++){
+                    cipherF[i] = Integer.parseInt(cipherT[i],2);
+                }
+                char[] cipherA = new char[tamaño];
+                for(int i=0;i<cipherT.length;i++){
+                    cipherA[i] = (char)cipherF[i];
+                }
                 imprimirArray(cipher);
-            } else {
-                if (opcion_menu == 2) {
-                    System.out.println("2. Desencriptar un texto cifrado");
-                    System.out.println("Hola niña linda!");
-                    int[] k = {0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1};
-                    int[] c = {1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1};
-                    int[] k0 = pc1(k);
+                System.out.print("\n");
+                for(int i=0;i<cipherA.length;i++){
+                    System.out.print(cipherA[i]);
+                }
+    }
+    
+    private static void descifrado(int[]c,int[]k){
+        int[] k0 = pc1(k);
 //System.out.println("Llave ingresada - k: ");
 //imprimirArray(k);
 //System.out.println("\nAplicando PC-1(k)-k': ");
@@ -125,7 +259,7 @@ public class DESprincipal {
 //System.out.println("\nArray D" + i + ": ");
 //imprimirArray(D[i]);
 //System.out.println("\nSub-Key: " +i );
-//subKey[i] = pc2(C[i], D[i]);
+                    subKey[i] = pc2(C[i], D[i]);
 //imprimirArray(subKey[i]);
                     }
                     int[] c0 = ip(c);
@@ -134,30 +268,53 @@ public class DESprincipal {
                     for (int i = 0; i < (c0.length) / 2; i++) {
                         R[16][i] = c0[i];
                     }
-                    System.out.println("\nR 16 ");
-                    imprimirArray(R[16]);
+                    //System.out.println("\nR 16 ");
+                    //imprimirArray(R[16]);
                     for (int i = (c0.length) / 2; i < c0.length; i++) {
                         L[16][i - 32] = c0[i];
                     }
-                    System.out.println("\nL 16");
-                    imprimirArray(L[16]);
+                    //System.out.println("\nL 16");
+                    //imprimirArray(L[16]);
                     for (int i = 16; i >= 1; i--) {
                         R[i - 1] = L[i];
                         L[i - 1] = xor(R[i], f(L[i], subKey[i]));
-                        System.out.println("\nLLLLLLL " + (i - 1));
-                        imprimirArray(L[i - 1]);
-                        System.out.println("\nRRRRRRR " + (i - 1));
-                        imprimirArray(R[i - 1]);
+                        //System.out.println("\nLLLLLLL " + (i - 1));
+                        //imprimirArray(L[i - 1]);
+                        //System.out.println("\nRRRRRRR " + (i - 1));
+                        //imprimirArray(R[i - 1]);
                     }
                     int[] decipher = ipmenos1(L[0], R[0]);
+                    int tamaño = decipher.length/8;
+                    String[] decipherT = new String[tamaño];
                     System.out.println("\nTEXTO DESCIFRADO!!! ");
-                    imprimirArray(decipher);
+                    for(int i=0;i<tamaño;i++){
+                    decipherT[i] = Integer.toString(decipher[(i*8)+0]);
+                    decipherT[i] = decipherT[i] + Integer.toString(decipher[(i*8)+1]);
+                    decipherT[i] = decipherT[i] + Integer.toString(decipher[(i*8)+2]);
+                    decipherT[i] = decipherT[i] + Integer.toString(decipher[(i*8)+3]);
+                    decipherT[i] = decipherT[i] + Integer.toString(decipher[(i*8)+4]);
+                    decipherT[i] = decipherT[i] + Integer.toString(decipher[(i*8)+5]);
+                    decipherT[i] = decipherT[i] + Integer.toString(decipher[(i*8)+6]);
+                    decipherT[i] = decipherT[i] + Integer.toString(decipher[(i*8)+7]);
                 }
-            }
-//TO-DO: Hacer los stages
-        } while (opcion_menu != 3);
+                /*for (int i=0;i<cipherT.length;i++){
+                    System.out.println(cipherT[i]);
+                } */
+                int[] decipherF = new int[decipherT.length];
+                for(int i=0;i<decipherT.length;i++){
+                    decipherF[i] = Integer.parseInt(decipherT[i],2);
+                }
+                char[] decipherA = new char[tamaño];
+                for(int i=0;i<decipherT.length;i++){
+                    decipherA[i] = (char)decipherF[i];
+                }
+                imprimirArray(decipher);
+                System.out.print("\n");
+                for(int i=0;i<decipherA.length;i++){
+                    System.out.print(decipherA[i]);
+                }
     }
-
+    
     private static int[] pc1(int[] entrada_llave) {
         int[] temporal = new int[]{
             entrada_llave[56], entrada_llave[48], entrada_llave[40], entrada_llave[32], entrada_llave[24],
