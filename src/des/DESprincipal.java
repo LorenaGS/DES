@@ -170,16 +170,10 @@ public class DESprincipal {
                 System.out.println("\nRRRRRRR " + (i-1));
                 imprimirArray(R[i-1]);
             }
-<<<<<<< HEAD
-        else{
-            if(opcion_menu==2){
-                int[] temp={};
-=======
             int[] decipher = ipmenos1(L[0],R[0]);
             
             System.out.println("\nTEXTO DESCIFRADO!!! ");
             imprimirArray(decipher);
->>>>>>> c6db9058eea33399ba68f103f156aa15aa670efb
             }
         }
             
@@ -360,7 +354,8 @@ public class DESprincipal {
         System.out.println("1. Encriptar mensaje");
         System.out.println("2. Desencriptar mensaje");
         System.out.println("3. Salir");
-        System.out.println("Ingrese su opción: ");   
+        System.out.println("Ingrese su opción: ");
+        
     }
     
     private static int[] seleccionbox(int[] vectorB, int indice){
@@ -409,11 +404,8 @@ public class DESprincipal {
             }else{
                 temporal[i]=1;
             }
-        } 
+        }
+         
         return temporal;
-<<<<<<< HEAD
-    }   
-=======
     }
->>>>>>> c6db9058eea33399ba68f103f156aa15aa670efb
 }
