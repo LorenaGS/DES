@@ -131,8 +131,15 @@ public class DESprincipal {
         int[] arregloAscii = new int[charArray.length];
         
         tamaño = arregloAscii.length/8;
+        int tamañototal = 0;
+        for (int i = 1; i < 10; i++) {
+            if (arregloAscii.length <= 16 * i) {
+                tamañototal = i;
+                i = 10;
+            }
+        }
         resto = arregloAscii.length%8;
-        String[] arregloBinarios = new String[(8*tamaño+resto)];
+        String[] arregloBinarios = new String[(8*tamañototal)];
         for (int i=0;i<charArray.length;i++){
             arregloAscii[i]= charArray[i];
             arregloBinarios[i] = String.format("%8s", Integer.toBinaryString(arregloAscii[i])).replace(' ', '0');
